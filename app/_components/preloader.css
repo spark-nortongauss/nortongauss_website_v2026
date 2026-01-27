@@ -1,0 +1,108 @@
+/* 
+   Please ensure you have the Techno_Nue font files in your public/fonts directory 
+   and update the src paths if they differ.
+*/
+
+@font-face {
+    font-family: 'Techno_Nue';
+    src: url('/fonts/Techno_Nue-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Techno_Nue';
+    src: url('/fonts/Techno_Nue-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+.mil-preloader {
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #000000;
+}
+
+.mil-preloader.mil-hidden {
+    pointer-events: none;
+    display: none;
+}
+
+.mil-preloader .mil-preloader-animation {
+    opacity: 0;
+    position: relative;
+    height: 100vh;
+    color: #FFFFFF;
+}
+
+.mil-preloader .mil-preloader-animation .mil-pos-abs {
+    position: absolute;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mil-preloader .mil-preloader-animation .mil-pos-abs p {
+    opacity: 0;
+    margin-right: 15px;
+}
+
+.mil-preloader .mil-preloader-animation .mil-pos-abs .mil-reveal-frame {
+    position: relative;
+    padding: 0 30px;
+    display: inline-block; /* Ensure it wraps content */
+}
+
+.mil-preloader .mil-preloader-animation .mil-pos-abs .mil-reveal-frame .mil-reveal-box {
+    z-index: 4;
+    position: absolute;
+    opacity: 0;
+    height: 100%;
+    /* Accent Color from user request #D8FF36 */
+    background-color: #D8FF36; 
+    top: 0;
+    left: 0;
+}
+
+.mil-logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1; /* Animation controls children opacity */
+}
+
+.mil-preloader-logo {
+    width: 50px;
+    height: 50px;
+    margin-right: 15px;
+    opacity: 0; /* Initial state for animation */
+}
+
+.mil-h3 {
+    /* Using Techno_Nue as requested, with fallback */
+    font-family: 'Techno_Nue', sans-serif; 
+    font-weight: 400; /* Regular by default */
+    font-size: 50px;
+    line-height: 120%;
+    margin: 0;
+}
+
+.mil-muted {
+    color: #FFFFFF;
+}
+
+.mil-thin {
+    font-weight: 400; /* Techno_Nue Regular */
+}
+
+/* If you have a bold variant, use font-weight: 700 or explicitly set it */
+.mil-accent {
+    color: #D8FF36;
+    font-weight: 700; /* Techno_Nue Bold */
+}
