@@ -38,12 +38,12 @@ export default function Navbar() {
       </div>
 
       {/* Navigation Links */}
-      <ul className="flex items-center space-x-8">
+      <ul className="flex items-center space-x-4 xl:space-x-8">
         {navLinks.map((link) => (
           <li key={link.name}>
             <Link
               href={link.href}
-              className={`text-[26px] font-normal font-techno-nue transition-colors duration-200 ${
+              className={`text-lg xl:text-[26px] font-normal font-techno-nue transition-colors duration-200 ${
                 pathname === link.href
                   ? "text-[#D8FF36]"
                   : "text-white hover:text-[#D8FF36]"
@@ -59,7 +59,7 @@ export default function Navbar() {
       <div>
         <Link
           href="/book-a-call"
-          className="bg-[#D8FF36] text-black text-[26px] font-normal font-techno-nue px-6 py-2 rounded-full hover:bg-white transition-colors duration-200"
+          className="bg-[#D8FF36] text-black text-lg xl:text-[26px] font-normal font-techno-nue px-4 py-2 xl:px-6 xl:py-2 rounded-full hover:bg-white transition-colors duration-200 whitespace-nowrap"
         >
           Book a Call
         </Link>
