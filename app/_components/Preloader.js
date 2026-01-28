@@ -131,7 +131,7 @@ export default function Preloader() {
                 alt="NG Logo"
                 className="mil-preloader-logo"
               />
-              <p className="mil-h3">NORTON-GAUSS</p>
+              <p className="mil-h3 mil-font-ancorli">NORTON-GAUSS</p>
             </div>
           </div>
         </div>
