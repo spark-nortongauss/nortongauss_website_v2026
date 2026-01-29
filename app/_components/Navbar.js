@@ -353,8 +353,8 @@ export default function Navbar() {
       {/* Desktop Background Overlay */}
       {activeDropdown && (
         <div
-          className="navbar-overlay hidden lg:block fixed inset-0 bg-black z-40"
-          style={{ top: "10rem" }}
+          className="navbar-overlay hidden lg:block fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
+          style={{ top: "8rem" }}
           onMouseEnter={() => setActiveDropdown(null)}
         />
       )}
@@ -363,10 +363,10 @@ export default function Navbar() {
       {activeDropdown && (
         <div
           className="dropdown-container hidden lg:block fixed left-0 right-0 z-45 bg-[#0a0a0a] border-t border-white/20"
-          style={{ top: "10rem" }}
+          style={{ top: "8rem" }}
           onMouseLeave={() => setActiveDropdown(null)}
         >
-          <div className="max-w-7xl mx-auto px-10 py-28">
+          <div className="max-w-7xl mx-auto px-10 py-16">
             <div className="flex justify-center gap-12 flex-wrap">
               {dropdownMenus[activeDropdown]?.map((item) => (
                 <Link
