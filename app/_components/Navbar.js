@@ -17,7 +17,7 @@ export default function Navbar() {
     { name: "Industries", href: "/industries", hasDropdown: true },
     { name: "Services", href: "/services", hasDropdown: true },
     { name: "Solutions", href: "/solutions", hasDropdown: true },
-    { name: "Insights", href: "/insights", hasDropdown: false },
+    { name: "Case & Insights", href: "/case-insights", hasDropdown: true },
     { name: "About", href: "/about", hasDropdown: false },
     { name: "Careers", href: "/careers", hasDropdown: false },
     { name: "Contact", href: "/contact", hasDropdown: false },
@@ -27,68 +27,90 @@ export default function Navbar() {
   const dropdownMenus = {
     Industries: [
       {
-        title: "Financial Services",
-        description: "Banking and fintech solutions",
-        href: "/industries/financial-services",
+        title: "Telecom and Communications",
+        description: "",
+        href: "/industries/telecom-media-communications",
       },
       {
-        title: "Healthcare",
-        description: "Medical and healthcare systems",
-        href: "/industries/healthcare",
+        title: "Industry & Manufacturing",
+        description: "",
+        href: "/industries/industry-manufacturing",
       },
       {
-        title: "Retail & E-commerce",
-        description: "Online retail platforms",
-        href: "/industries/retail",
+        title: "Food & Beverage",
+        description: "",
+        href: "/industries/food-beverage",
       },
       {
-        title: "Technology",
-        description: "Tech sector solutions",
-        href: "/industries/technology",
+        title: "Logistics & Supply Chain",
+        description: "",
+        href: "/industries/logistics-supply-chain",
+      },
+      {
+        title: "Retail & Ecommerce",
+        description: "",
+        href: "/industries/retail-ecommerce",
       },
     ],
     Services: [
       {
-        title: "Consulting",
-        description: "Strategic business consulting",
-        href: "/services/consulting",
+        title: "Digital Strategy & Transformation",
+        description: "",
+        href: "/services/digital-strategy-transformation",
       },
       {
-        title: "Development",
-        description: "Custom software development",
-        href: "/services/development",
+        title: "Cloud & Edge",
+        description: "",
+        href: "/services/cloud-edge",
       },
       {
-        title: "Integration",
-        description: "System integration services",
-        href: "/services/integration",
+        title: "Gen AI & Agents",
+        description: "",
+        href: "/services/gen-ai-agents",
       },
       {
-        title: "Support",
-        description: "24/7 technical support",
-        href: "/services/support",
+        title: "Automation & RPA",
+        description: "",
+        href: "/services/automation-rpa",
+      },
+      {
+        title: "Observability & Monitoring",
+        description: "",
+        href: "/services/observability-monitoring",
       },
     ],
     Solutions: [
       {
-        title: "Cloud Solutions",
-        description: "Scalable cloud infrastructure",
-        href: "/solutions/cloud",
+        title: "ObservOne",
+        description: "",
+        href: "/solutions/observone",
       },
       {
-        title: "AI & Analytics",
-        description: "Data-driven insights",
-        href: "/solutions/ai-analytics",
+        title: "Zylo (commercial proposals automation)",
+        description: "",
+        href: "/solutions/zylo",
+      },
+    ],
+    "Case & Insights": [
+      {
+        title: "Gen AI & Agents",
+        description: "",
+        href: "/case-insights/gen-ai-agents",
       },
       {
-        title: "Security",
-        description: "Enterprise security solutions",
-        href: "/solutions/security",
+        title: "Automation & RPA",
+        description: "",
+        href: "/case-insights/automation-rpa",
       },
       {
-        title: "Automation",
-        description: "Business process automation",
-        href: "/solutions/automation",
+        title: "Cloud & Edge",
+        description: "",
+        href: "/case-insights/cloud-edge",
+      },
+      {
+        title: "Digital Strategy & Automation",
+        description: "",
+        href: "/case-insights/digital-strategy-automation",
       },
     ],
   };
@@ -102,23 +124,23 @@ export default function Navbar() {
       timeline.fromTo(
         ".navbar-overlay",
         { opacity: 0 },
-        { opacity: 1, duration: 0.3, ease: "power2.out" }
+        { opacity: 1, duration: 0.3, ease: "power2.out" },
       );
 
-      // Animate dropdown slide down and fade in
+      // Animate dropdown fade in (container remains static)
       timeline.fromTo(
         ".dropdown-container",
-        { opacity: 0, y: -20 },
-        { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" },
-        "-=0.2" // Start slightly before overlay finishes
+        { opacity: 0 },
+        { opacity: 1, duration: 0.4, ease: "power2.out" },
+        "-=0.2", // Start slightly before overlay finishes
       );
 
-      // Stagger animate menu items
+      // Animate menu items from bottom (no stagger to avoid left-to-right wave)
       timeline.fromTo(
         ".dropdown-item",
-        { opacity: 0, y: 10 },
-        { opacity: 1, y: 0, duration: 0.3, stagger: 0.05, ease: "power2.out" },
-        "-=0.2"
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" },
+        "-=0.2",
       );
     }
   }, [activeDropdown]);
@@ -132,7 +154,7 @@ export default function Navbar() {
       timeline.fromTo(
         ".mobile-menu",
         { y: "-100%" },
-        { y: 0, duration: 0.5, ease: "power3.out" }
+        { y: 0, duration: 0.5, ease: "power3.out" },
       );
 
       // Stagger animate menu items from top
@@ -140,7 +162,7 @@ export default function Navbar() {
         ".mobile-nav-item",
         { opacity: 0, y: -20 },
         { opacity: 1, y: 0, duration: 0.4, stagger: 0.08, ease: "power2.out" },
-        "-=0.3"
+        "-=0.3",
       );
     }
   }, [isMobileMenuOpen]);
@@ -153,7 +175,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 md:px-10 py-6">
+      <nav className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 md:px-10 py-6 lg:py-12">
         {/* Logo */}
         <div className="flex items-center">
           <Link href="/">
@@ -175,7 +197,7 @@ export default function Navbar() {
                   className="cursor-pointer"
                 >
                   <span
-                    className={`text-lg xl:text-[26px] font-normal font-techno-nue transition-colors duration-200 ${
+                    className={`text-lg xl:text-[18px] font-normal font-techno-nue transition-colors duration-200 ${
                       pathname === link.href || activeDropdown === link.name
                         ? "text-[#D8FF36]"
                         : "text-white hover:text-[#D8FF36]"
@@ -187,7 +209,8 @@ export default function Navbar() {
               ) : (
                 <Link
                   href={link.href}
-                  className={`text-lg xl:text-[26px] font-normal font-techno-nue transition-colors duration-200 ${
+                  onMouseEnter={() => setActiveDropdown(null)}
+                  className={`text-lg xl:text-[18px] font-normal font-techno-nue transition-colors duration-200 ${
                     pathname === link.href
                       ? "text-[#D8FF36]"
                       : "text-white hover:text-[#D8FF36]"
@@ -204,7 +227,7 @@ export default function Navbar() {
         <div className="hidden lg:block">
           <Link
             href="/book-a-call"
-            className="bg-[#D8FF36] text-black text-lg xl:text-[26px] font-normal font-techno-nue px-4 py-2 xl:px-6 xl:py-2 rounded-full hover:bg-white transition-colors duration-200 whitespace-nowrap"
+            className="bg-[#D8FF36] text-black text-lg xl:text-[18px] font-bold font-techno-nue px-4 py-2 xl:px-6 xl:py-2 rounded-full hover:bg-white transition-colors duration-200 whitespace-nowrap"
           >
             Book a Call
           </Link>
@@ -253,7 +276,7 @@ export default function Navbar() {
                         setExpandedMobileDropdown(
                           expandedMobileDropdown === link.name
                             ? null
-                            : link.name
+                            : link.name,
                         )
                       }
                       className="flex items-center justify-between cursor-pointer"
@@ -319,7 +342,7 @@ export default function Navbar() {
           <div className="mt-8 mobile-nav-item">
             <Link
               href="/book-a-call"
-              className="block text-center bg-[#D8FF36] text-black text-xl font-normal font-techno-nue px-6 py-3 rounded-full hover:bg-white transition-colors duration-200"
+              className="block text-center bg-[#D8FF36] text-black text-xl font-bold font-techno-nue px-6 py-3 rounded-full hover:bg-white transition-colors duration-200"
             >
               Book a Call
             </Link>
@@ -331,7 +354,7 @@ export default function Navbar() {
       {activeDropdown && (
         <div
           className="navbar-overlay hidden lg:block fixed inset-0 bg-black z-40"
-          style={{ top: "6.5rem" }}
+          style={{ top: "10rem" }}
           onMouseEnter={() => setActiveDropdown(null)}
         />
       )}
@@ -339,19 +362,19 @@ export default function Navbar() {
       {/* Desktop Dropdown Container */}
       {activeDropdown && (
         <div
-          className="dropdown-container hidden lg:block fixed left-0 right-0 z-45 bg-[#0a0a0a]"
-          style={{ top: "6.5rem" }}
+          className="dropdown-container hidden lg:block fixed left-0 right-0 z-45 bg-[#0a0a0a] border-t border-white/20"
+          style={{ top: "10rem" }}
           onMouseLeave={() => setActiveDropdown(null)}
         >
-          <div className="max-w-7xl mx-auto px-10 py-8">
-            <div className="flex justify-center gap-8 flex-wrap">
-              {dropdownMenus[activeDropdown].map((item) => (
+          <div className="max-w-7xl mx-auto px-10 py-28">
+            <div className="flex justify-center gap-12 flex-wrap">
+              {dropdownMenus[activeDropdown]?.map((item) => (
                 <Link
                   href={item.href}
                   className="dropdown-item flex flex-col max-w-xs group cursor-pointer"
                   key={item.title}
                 >
-                  <h3 className="text-white text-xl xl:text-2xl font-techno-nue font-normal mb-2 group-hover:text-[#D8FF36] transition-colors duration-200">
+                  <h3 className="text-white text-[16px] font-techno-nue font-normal mb-2 group-hover:text-[#D8FF36] transition-colors duration-200">
                     {item.title}
                   </h3>
                   <p className="text-gray-400 text-sm xl:text-base">
