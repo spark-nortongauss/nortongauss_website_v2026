@@ -2,9 +2,9 @@
 
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import Script from "next/script";
 
 const Hero = () => {
-  const canvasRef = useRef(null);
   const heroRef = useRef(null);
   const title1Ref = useRef(null);
   const title2Ref = useRef(null);
@@ -13,89 +13,6 @@ const Hero = () => {
   const btnRef = useRef(null);
 
   useEffect(() => {
-    // Canvas Particle System
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    let animationFrameId;
-
-    let particles = [];
-    const particleCount = 1500;
-
-    const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-
-    window.addEventListener("resize", resize);
-    resize();
-
-    class Particle {
-      constructor() {
-        this.reset();
-      }
-
-      reset() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.z = Math.random() * canvas.width;
-        this.pz = this.z;
-        this.vx = (Math.random() - 0.5) * 0.2;
-        this.vy = (Math.random() - 0.5) * 0.2;
-        this.speed = Math.random() * 0.5 + 0.1;
-
-        // Random color between green and yellow
-        const hue = Math.random() < 0.8 ? 70 : 60; // Greenish yellow
-        this.color = `hsla(${hue}, 100%, 50%, ${Math.random() * 0.5 + 0.2})`;
-      }
-
-      update() {
-        this.z -= this.speed;
-        if (this.z <= 0) {
-          this.reset();
-          this.z = canvas.width;
-          this.pz = this.z;
-        }
-
-        this.x += this.vx;
-        this.y += this.vy;
-      }
-
-      draw() {
-        const sx =
-          (this.x - canvas.width / 2) * (canvas.width / this.z) +
-          canvas.width / 2;
-        const sy =
-          (this.y - canvas.height / 2) * (canvas.width / this.z) +
-          canvas.height / 2;
-
-        const r = (canvas.width / this.z) * 0.5;
-
-        ctx.beginPath();
-        ctx.arc(sx, sy, r, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
-        ctx.fill();
-      }
-    }
-
-    for (let i = 0; i < particleCount; i++) {
-      particles.push(new Particle());
-    }
-
-    const animate = () => {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      particles.forEach((p) => {
-        p.update();
-        p.draw();
-      });
-
-      animationFrameId = requestAnimationFrame(animate);
-    };
-
-    animate();
-
     // GSAP Animations
     const tl = gsap.timeline({
       defaults: { ease: "power3.out", duration: 1.2 },
@@ -130,30 +47,32 @@ const Hero = () => {
         { scale: 1, opacity: 1 },
         "-=0.6",
       );
-
-    return () => {
-      window.removeEventListener("resize", resize);
-      cancelAnimationFrame(animationFrameId);
-    };
   }, []);
 
   return (
     <section
       ref={heroRef}
-      className="relative w-full h-screen overflow-hidden bg-black flex flex-col justify-start pt-40 md:pt-48 px-6 md:px-20"
+      className="relative w-full h-screen overflow-hidden bg-black flex flex-col justify-start pt-32 md:pt-36 px-6 md:px-20"
     >
-      {/* Background Animation */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 z-0 pointer-events-none opacity-60"
+      <Script
+        type="module"
+        src="https://unpkg.com/@splinetool/viewer@1.12.42/build/spline-viewer.js"
       />
 
-      {/* Content */}
-      <div className="relative z-10 flex flex-col items-start gap-4 max-w-5xl">
+      {/* Background 3D Scene */}
+      <div className="absolute inset-0 z-0 w-full h-full">
+        <spline-viewer
+          url="https://prod.spline.design/DPOTOKwHkxuxDRd0/scene.splinecode"
+          loading-anim-type="spinner-small-dark"
+        ></spline-viewer>
+      </div>
+
+      {/* Content Container - pointer-events-none to let clicks pass to canvas, but children auto */}
+      <div className="relative z-10 flex flex-col items-start gap-2 max-w-5xl pointer-events-none">
         <div className="overflow-hidden">
           <h1
             ref={title1Ref}
-            className="text-[12vw] md:text-[10rem] font-bold leading-[0.85] tracking-tight uppercase"
+            className="text-[12vw] md:text-[8rem] font-bold leading-[0.85] tracking-tight uppercase pointer-events-auto"
           >
             CLOUD
           </h1>
@@ -162,14 +81,17 @@ const Hero = () => {
         <div className="overflow-hidden ml-[10vw]">
           <h1
             ref={title2Ref}
-            className="text-[12vw] md:text-[10rem] font-bold leading-[0.85] tracking-tight uppercase"
+            className="text-[12vw] md:text-[8rem] font-bold leading-[0.85] tracking-tight uppercase pointer-events-auto"
           >
             & EDGE
           </h1>
         </div>
 
         {/* Tags */}
-        <div ref={tagsRef} className="flex flex-wrap gap-4 mt-8">
+        <div
+          ref={tagsRef}
+          className="flex flex-wrap gap-4 mt-6 pointer-events-auto"
+        >
           {["PUBLIC", "HYBRID", "ON-PREM"].map((tag) => (
             <span
               key={tag}
@@ -183,7 +105,7 @@ const Hero = () => {
         {/* Description */}
         <p
           ref={descRef}
-          className="max-w-md mt-6 text-sm md:text-base text-white/50 leading-relaxed font-sans"
+          className="max-w-md mt-4 text-sm md:text-base text-white/50 leading-relaxed font-sans pointer-events-auto"
         >
           Norton-Gauss provides seamless cloud and edge solutions that empower
           your business with high-performance computing and intelligent data
@@ -191,7 +113,7 @@ const Hero = () => {
         </p>
 
         {/* CTA Button */}
-        <div className="mt-10">
+        <div className="mt-8 pointer-events-auto">
           <button
             ref={btnRef}
             className="bg-brand text-black px-12 py-4 rounded-full font-bold text-sm md:text-lg tracking-wider uppercase hover:scale-105 active:scale-95 transition-transform"
@@ -201,8 +123,8 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Scroll Down Indicator (Optional but matches design spirit) */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30">
+      {/* Scroll Down Indicator */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30 pointer-events-none">
         <span className="text-[10px] tracking-widest uppercase">
           scroll down
         </span>
