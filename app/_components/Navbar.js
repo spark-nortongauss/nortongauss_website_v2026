@@ -175,7 +175,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 md:px-10 py-6 lg:py-12">
+      <nav className="absolute top-0 left-0 w-full z-50 flex items-center justify-between px-6 md:px-10 py-6 lg:py-12">
         {/* Logo */}
         <div className="flex items-center">
           <Link href="/">
