@@ -76,7 +76,7 @@ export default function Services() {
             ease: "power2.out",
             scrollTrigger: {
               trigger: card, // Each card triggers itself
-              start: "top 70%", // Starts when card top is at 85% viewport (near bottom)
+              start: "top 75%", // Starts when card top is at 85% viewport (near bottom)
               end: "bottom 20%",
               toggleActions: "play none none reverse",
             },
