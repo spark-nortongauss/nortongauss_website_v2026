@@ -5,6 +5,7 @@ import UseCases from "./_components/UseCases";
 import GlobalOps from "./_components/GlobalOps";
 
 import FullscreenLogo from "./_components/FullscreenLogo";
+import Footer from "./_components/Footer";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <UseCases />
       <GlobalOps />
       <FullscreenLogo />
+      <Footer />
     </main>
   );
 }
