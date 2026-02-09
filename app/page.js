@@ -1,6 +1,7 @@
 import Hero from "./_components/Hero";
 import About from "./_components/About";
 import Services from "./_components/Services";
+import UseCases from "./_components/UseCases";
 import GlobalOps from "./_components/GlobalOps";
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
       <About />
       <Services />
       <GlobalOps />
+      <UseCases />
     </main>
   );
 }
