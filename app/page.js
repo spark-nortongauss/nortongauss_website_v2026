@@ -4,6 +4,8 @@ import Services from "./_components/Services";
 import UseCases from "./_components/UseCases";
 import GlobalOps from "./_components/GlobalOps";
 
+import FullscreenLogo from "./_components/FullscreenLogo";
+
 export default function Home() {
   return (
     <main className="min-h-screen bg-black">
@@ -12,6 +14,7 @@ export default function Home() {
       <Services />
       <UseCases />
       <GlobalOps />
+      <FullscreenLogo />
     </main>
   );
 }
