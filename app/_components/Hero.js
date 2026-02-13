@@ -19,7 +19,7 @@ const slides = [
     title2: "& RPA",
     tags: ["INTELLIGENT", "EFFICIENT", "SCALABLE"],
     desc: "Streamline operations with advanced robotic process automation and intelligent workflows designed for the future of work.",
-    splineUrl: "/scene_robot.splinecode",
+    splineUrl: "/scene_bot.splinecode",
   },
 ];
 
@@ -35,6 +35,44 @@ const Hero = () => {
   const tagsRef = useRef(null);
   const descRef = useRef(null);
   const btnRef = useRef(null);
+
+  // Lock vertical rotation on spline viewers (allow only horizontal spin)
+  useEffect(() => {
+    const lockVerticalRotation = () => {
+      const viewers = heroRef.current?.querySelectorAll("spline-viewer");
+      if (!viewers || viewers.length === 0) return;
+
+      viewers.forEach((viewer) => {
+        try {
+          const shadowCanvas = viewer.shadowRoot?.querySelector("canvas");
+          if (!shadowCanvas) return;
+
+          // Try to access Three.js orbit controls via internal refs
+          const app = viewer._app || viewer.spline;
+          if (app) {
+            const controls =
+              app._controls || app._orbitControls || app.controls;
+            if (controls) {
+              controls.minPolarAngle = Math.PI / 2;
+              controls.maxPolarAngle = Math.PI / 2;
+              controls.enableDamping = true;
+            }
+          }
+        } catch (e) {
+          // Silently fail if internal API is not accessible
+        }
+      });
+    };
+
+    // Retry a few times as spline viewers load asynchronously
+    const timers = [
+      setTimeout(lockVerticalRotation, 2000),
+      setTimeout(lockVerticalRotation, 4000),
+      setTimeout(lockVerticalRotation, 6000),
+    ];
+
+    return () => timers.forEach(clearTimeout);
+  }, []);
 
   // Auto-switch logic
   useEffect(() => {
